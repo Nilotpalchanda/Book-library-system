@@ -1,4 +1,4 @@
-import { FETCH_POSTS, NEW_POST, REMOVE_BOOK } from './types';
+import { FETCH_POSTS, NEW_POST, REMOVE_BOOK,FETCH_PRODUCT_FILTER } from './types';
 
 export const fetchPosts = () => dispatch => {
   fetch('https://booklibrary-api.herokuapp.com/products')
@@ -42,3 +42,9 @@ export const deleteContact = data =>dispatch => {
     })
   );
 }
+export const fetchProductsFilter = (searchValue) => {
+  return {
+      type: FETCH_PRODUCT_FILTER,
+      searchValue
+  }
+};

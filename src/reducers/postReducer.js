@@ -1,8 +1,10 @@
-import { FETCH_POSTS, NEW_POST ,REMOVE_BOOK} from '../actions/types';
+import { FETCH_POSTS, NEW_POST ,REMOVE_BOOK,FETCH_PRODUCT_FILTER} from '../actions/types';
 
 const initialState = {
   items: [],
-  item: {}
+  item: {},
+  searchArray:[],
+  searchValue: '',
 };
 
 export default function(state = initialState, action) {
@@ -12,7 +14,8 @@ export default function(state = initialState, action) {
     case FETCH_POSTS:
       return {
         ...state,
-        items: action.payload
+        items: action.payload,
+        searchArray:action.payload
         
       };
     case NEW_POST:
@@ -25,6 +28,18 @@ export default function(state = initialState, action) {
           ...state,
           items: state.items.filter((data, i) => i !== action.id)
         }
+     case FETCH_PRODUCT_FILTER:
+
+          const { searchValue } = action;
+          var updatedList = state.items;
+          updatedList = updatedList.filter(function(item){
+            return item.bookname.toLowerCase().search(searchValue.toLowerCase()) !== -1
+          });
+          return { 
+            ...state, 
+            searchValue,
+            searchArray:updatedList 
+          };
     default:
       return state;
   }

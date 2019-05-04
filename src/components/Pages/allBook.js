@@ -4,7 +4,9 @@ import Card from '../Books/Card'
 import Loader from '../loader/loader'
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { fetchPosts,deleteContact } from '../../actions/postActions';
+import { bindActionCreators } from 'redux';
+import { fetchPosts,deleteContact,fetchProductsFilter } from '../../actions/postActions';
+
 class allBook extends Component {
     constructor(props) {
         super(props);
@@ -14,12 +16,14 @@ class allBook extends Component {
         e.preventDefault();
         this.props.deleteContact(data)
         setTimeout(() => {
-            <Loader/>
             this.props.fetchPosts();
         }, 2000);
         
     }
-    componentWillMount() {
+    handleSearch = (searchValue) => {
+        this.props.fetchProductsFilter(searchValue);
+    }
+    componentDidMount() {
         this.props.fetchPosts();
     }
     render() {
@@ -39,7 +43,12 @@ class allBook extends Component {
             <React.Fragment>
                 <App>
                     <h2>Responsive Column Cards</h2>
+                    <input type="search" size="45" 
+                    value= { this.props.searchValue }
+                    onInput={ (e) => this.handleSearch(e.target.value) }
+                    />
                     <p>Resize the browser window to see the effect.</p>
+                    
                     {cards.length ? cards : <Loader />}
                 </App>
             </React.Fragment>
@@ -53,9 +62,10 @@ allBook.propTypes = {
     deleteContact: PropTypes.func.isRequired
 
 };
-
+const mapDispatchToProps = dispatch => bindActionCreators({fetchProductsFilter,deleteContact, fetchPosts}, dispatch);
 const mapStateToProps = state => ({
-    posts: state.posts.items
+    posts: state.posts.searchArray,
+    searchValue: state.posts.searchValue
 });
 
-export default connect(mapStateToProps, {deleteContact, fetchPosts })(allBook);
+export default connect(mapStateToProps,mapDispatchToProps)(allBook);
