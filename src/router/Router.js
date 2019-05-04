@@ -1,14 +1,17 @@
 import React, { Component } from 'react'
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import { Router, Route, Switch} from 'react-router-dom';
 import allBook from '../components/Pages/allBook'
 import addBook from '../components/Pages/addBook'
+import editBook from '../components/Pages/editBook'
+import history from './history'
 class router extends Component {
     render(){
         return(
-            <Router>
+            <Router history={history}>
                     <Switch>
                         <Route exact path="/" component={allBook} />
                         <Route exact path="/addbook" component={addBook} />
+                        <Route exact path="/editbook" component={editBook} />
                     </Switch>
             </Router>
         )

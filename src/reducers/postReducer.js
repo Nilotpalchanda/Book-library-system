@@ -1,10 +1,11 @@
-import { FETCH_POSTS, NEW_POST ,REMOVE_BOOK,FETCH_PRODUCT_FILTER} from '../actions/types';
+import { FETCH_POSTS, NEW_POST ,REMOVE_BOOK,FETCH_PRODUCT_FILTER,SELECT_FILTER} from '../actions/types';
 
 const initialState = {
   items: [],
   item: {},
   searchArray:[],
   searchValue: '',
+  selectedValue:''
 };
 
 export default function(state = initialState, action) {
@@ -38,6 +39,18 @@ export default function(state = initialState, action) {
           return { 
             ...state, 
             searchValue,
+            searchArray:updatedList 
+          };
+      case SELECT_FILTER:
+        debugger;
+          const { selectedValue } = action;
+          var updatedList = state.items;
+          updatedList = updatedList.filter(function(item){
+            return item.bookcategory.toLowerCase().search(selectedValue.toLowerCase()) !== -1
+          });
+          return { 
+            ...state, 
+            selectedValue,
             searchArray:updatedList 
           };
     default:

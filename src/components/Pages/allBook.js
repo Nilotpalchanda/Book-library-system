@@ -5,28 +5,37 @@ import Loader from '../loader/loader'
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { fetchPosts,deleteContact,fetchProductsFilter } from '../../actions/postActions';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { fetchPosts, deleteContact, fetchProductsFilter, filerOptionValue } from '../../actions/postActions';
 
 class allBook extends Component {
     constructor(props) {
         super(props);
         this.deleteContact = this.deleteContact.bind(this);
-      }
-    deleteContact(e, data){
+        this.optionValue = this.optionValue.bind(this)
+    }
+    deleteContact(e, data) {
         e.preventDefault();
         this.props.deleteContact(data)
-        setTimeout(() => {
-            this.props.fetchPosts();
-        }, 2000);
-        
+        toast(<div><span className="FormFullName"></span> Delete Succefully</div>);
+
+
     }
     handleSearch = (searchValue) => {
         this.props.fetchProductsFilter(searchValue);
+    }
+    optionValue = (selectedValue) =>{
+        this.props.filerOptionValue(selectedValue)
+    }
+    editContact(e, data) {
+        this.props.history.push({ pathname: '/editBook', state: data });
     }
     componentDidMount() {
         this.props.fetchPosts();
     }
     render() {
+        console.log('ddd',this.props.posts)
         let cards = this.props.posts.map((book, index) => {
 
             return (
@@ -35,7 +44,11 @@ class allBook extends Component {
                     author={book.bookauthor}
                     name={book.bookname}
                     image={book.bookimage}
-                    onClick={(e) => this.deleteContact(e,book)}
+                    price={book.bookprice}
+                    count={book.bookcount}
+                    onClick={(e) => this.deleteContact(e, book)}
+                    onClickEdit={(e) => this.editContact(e, book)}
+
                 />
             )
         })
@@ -43,13 +56,21 @@ class allBook extends Component {
             <React.Fragment>
                 <App>
                     <h2>Responsive Column Cards</h2>
-                    <input type="search" size="45" 
-                    value= { this.props.searchValue }
-                    onInput={ (e) => this.handleSearch(e.target.value) }
+                    <input
+                        className="searchBook"
+                        type="search"
+                        placeholder="Search Books"
+                        value={this.props.searchValue}
+                        onInput={(e) => this.handleSearch(e.target.value)}
                     />
                     <p>Resize the browser window to see the effect.</p>
-                    
+                    <select name="caBrands" onChange={(e)=>this.optionValue(e.target.value)}>
+                    {this.props.posts.map((item, key) =>
+                    <option key={key} value={item.bookcategory}>{item.bookcategory}</option>
+                     )}
+                    </select>
                     {cards.length ? cards : <Loader />}
+                    <ToastContainer />
                 </App>
             </React.Fragment>
         )
@@ -59,13 +80,14 @@ class allBook extends Component {
 allBook.propTypes = {
     fetchPosts: PropTypes.func.isRequired,
     posts: PropTypes.array.isRequired,
-    deleteContact: PropTypes.func.isRequired
+    deleteContact: PropTypes.func.isRequired,
+    optionValue: PropTypes.func.isRequired
 
 };
-const mapDispatchToProps = dispatch => bindActionCreators({fetchProductsFilter,deleteContact, fetchPosts}, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({ fetchProductsFilter, deleteContact, fetchPosts, filerOptionValue }, dispatch);
 const mapStateToProps = state => ({
     posts: state.posts.searchArray,
     searchValue: state.posts.searchValue
 });
 
-export default connect(mapStateToProps,mapDispatchToProps)(allBook);
+export default connect(mapStateToProps, mapDispatchToProps)(allBook);

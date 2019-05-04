@@ -1,22 +1,22 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { createPost } from '../../actions/postActions';
-import App from '../../App'
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { createPatch } from '../../actions/postActions';
+import App from '../../App';
 
-class addBook extends Component {
+class editBook extends Component {
   constructor(props) {
     super(props);
+    const data = Object.assign({}, this.props.location.state);
     this.state = {
-      bookname: '',
-      bookauthor: '',
-      bookimage: '',
-      bookcount: '',
-      bookprice: '',
-      bookdescription: '',
-      bookcategory: ''
+      _id: data._id || '',
+      bookname: data.bookname || '',
+      bookauthor: data.bookauthor || '',
+      bookimage: data.bookimage || '',
+      bookcount: data.bookcount || '',
+      bookprice: data.bookprice || '',
+      bookdescription: data.bookdescription || '',
+      bookcategory: data.bookcategory || ''
     };
 
     this.onChange = this.onChange.bind(this);
@@ -24,7 +24,6 @@ class addBook extends Component {
   }
 
   onChange(e) {
-    debugger;
     this.setState({ [e.target.name]: e.target.value });
   }
 
@@ -32,6 +31,7 @@ class addBook extends Component {
     e.preventDefault();
 
     const post = {
+      _id: this.state._id,
       bookname: this.state.bookname,
       bookauthor: this.state.bookauthor,
       bookimage: this.state.bookimage,
@@ -40,22 +40,20 @@ class addBook extends Component {
       bookdescription: this.state.bookdescription,
       bookcategory: this.state.bookcategory
     };
-    this.props.createPost(post)
-    this.render();
-    toast(<div><span className="FormFullName"></span> Your Meassage Successfully Send. For conformation please Check Console</div>);
-
+    this.props.createPatch(post);
 
   }
 
   render() {
+console.log('ggg',this.props.location.state)
     return (
       <App>
         <div>
-          <h1>Add Post</h1>
+          <h1>Edit Post</h1>
           <div className="booklib-4"><img src={this.state.bookimage.length > 0 ? this.state.bookimage : "https://hazlitt.net/sites/default/files/default-book.png"} alt="Smiley face" width="100%" />
           </div>
           <div className="booklib-8">
-            <form id="create-course-form" onSubmit={this.onSubmit}>
+            <form onSubmit={this.onSubmit}>
               <div>
                 <label>Title: </label>
                 <br />
@@ -79,13 +77,11 @@ class addBook extends Component {
               <div>
                 <label>Category: </label>
                 <br />
-                <input list="browsers" onChange={this.onChange} name="bookcategory" />
+                <input list="browsers" value={this.state.bookcategory} onChange={this.onChange} name="bookcategory" />
                 <datalist id="browsers">
-                  <option value="Internet Explorer" />
-                  <option value="Firefox" />
-                  <option value="Chrome" />
-                  <option value="Opera" />
-                  <option value="Safari" />
+                  {[this.props.location.state].map((item, key) =>
+                    <option key={key} value={item.bookcategory} />
+                  )}
                 </datalist>
               </div>
               <div>
@@ -131,7 +127,6 @@ class addBook extends Component {
               </div>
               <br />
               <button className="buttonStyle" type="submit">Submit</button>
-              <ToastContainer />
             </form>
           </div>
         </div>
@@ -140,8 +135,8 @@ class addBook extends Component {
   }
 }
 
-addBook.propTypes = {
+editBook.propTypes = {
   createPost: PropTypes.func.isRequired
 };
 
-export default connect(null, { createPost })(addBook);
+export default connect(null, { createPatch })(editBook);

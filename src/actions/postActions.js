@@ -1,4 +1,4 @@
-import { FETCH_POSTS, NEW_POST, REMOVE_BOOK,FETCH_PRODUCT_FILTER } from './types';
+import { FETCH_POSTS, NEW_POST,FETCH_PRODUCT_FILTER,SELECT_FILTER } from './types';
 
 export const fetchPosts = () => dispatch => {
   fetch('https://booklibrary-api.herokuapp.com/products')
@@ -27,6 +27,23 @@ export const createPost = postData => dispatch => {
       })
     );
 };
+export const createPatch = (patchData) => dispatch => {
+  debugger;
+  fetch(`https://booklibrary-api.herokuapp.com/products/${patchData._id}`, {
+    method: 'PATCH',
+    headers: {
+      'content-type': 'application/json'
+    },
+    body: JSON.stringify(patchData)
+  })
+    .then(res => res.json())
+    .then(post =>
+      dispatch({
+        type: NEW_POST,
+        payload: post
+      })
+    );
+};
 export const deleteContact = data =>dispatch => {
   debugger;
   fetch(`https://booklibrary-api.herokuapp.com/products/${data._id}`, {
@@ -34,17 +51,20 @@ export const deleteContact = data =>dispatch => {
     headers: {
       'content-type': 'application/json'
     }
-  }).then(res => res.json())
-  .then(post =>
-    dispatch({
-      type: REMOVE_BOOK,
-      payload: data._id
-    })
-  );
+  }).then(res => {
+    dispatch(fetchPosts())
+  })
 }
 export const fetchProductsFilter = (searchValue) => {
   return {
       type: FETCH_PRODUCT_FILTER,
       searchValue
+  }
+};
+
+export const filerOptionValue = (selectedValue) => {
+  return {
+      type: SELECT_FILTER,
+      selectedValue
   }
 };

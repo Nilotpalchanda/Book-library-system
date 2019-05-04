@@ -9,12 +9,15 @@ body {
   	-moz-osx-font-smoothing: grayscale;
 }
 .header {
-	position: absolute;
 	width: 100%;
 	z-index: 3;
 	height: 44px;
 	background-color: #fff;
 	border-bottom: 3px solid #2d3d51;
+	position: fixed;
+	top: 0;
+	left: 0;
+	overflow-x: hidden;
 }
 /* logo in header(mobile version) and side-nav (tablet & desktop) */
 .logo {
@@ -74,12 +77,15 @@ body {
 }
 /* side navigation styles */
 .side-nav {
-	position: absolute;
 	width: 100%;
 	height: 100vh;
 	background-color: #35475e;
 	z-index: 1;
 	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	overflow-x: hidden;
 }
 .side-nav.visible {
 	display: block;

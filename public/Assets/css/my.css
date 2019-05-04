@@ -10,7 +10,7 @@
   .column {
     float: left;
     width: 25%;
-    padding: 0 10px;
+    padding: 0 10px 25px;
   }
   
   /* Remove extra left and right margins, due to padding */
@@ -25,6 +25,17 @@
   
   /* Responsive columns */
   @media screen and (max-width: 600px) {
+    .booklib-4{
+      margin-top: 14% !important;
+      max-width: 100% !important;
+      width: 100% !important;
+    }
+    .booklib-8{
+      width: 100% !important;
+    }
+    .main-content{
+      padding: 40px 30px;
+    }
     .column {
       width: 100%;
       display: block;
@@ -106,3 +117,64 @@
       margin-top: 0;
     }
   }  
+
+  .searchBook{
+    display: block;
+    width: 100%;
+    height: calc(1.5em + .75rem + 2px);
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 2px solid #4dd0e1;
+  }
+  .buttonStyle{
+    padding-top: .38rem;
+    padding-bottom: .38rem;
+    background: #f5f2f0!important;
+    border: 2px solid #616161!important;
+    color: #616161!important;
+    margin: 1px 17px 2px 1px;
+  }
+
+.booklibh4{
+    margin-top: 0px;
+    margin-bottom: 0px;
+    font-size: 14px;
+}
+.booklibP{
+    margin-top: 0px;
+    color: #878787;
+    font-size: 12px;
+    margin-bottom: 10px;
+    word-wrap: break-word;
+}
+.price{
+    display: inline-block;
+    font-size: 16px;
+    font-weight: 500;
+    color: #212121;
+}
+.count{
+    padding-left: 8px;
+    font-weight: 500;
+    color: #878787;
+}
+.priceCount{
+  margin-top: 0px;
+}
+
+.booklib-8{
+  flex: 60%;
+  width: 60%;
+  float: right;
+}
+.booklib-4{
+  flex: 40%;
+  max-width: 35%;
+  float: left;
+  margin-top: 4%;
+}

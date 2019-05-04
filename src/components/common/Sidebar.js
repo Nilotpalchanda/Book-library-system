@@ -12,29 +12,17 @@ export default class sideBar extends Component {
 			</div>
 			<nav>
 				<ul>
+				 <li>
+						<Link to="/">
+
+							<span><i className="fa fa-envelope"></i></span>
+							<span>Dashboard</span>
+						</Link>
+					</li>
 					<li>
 						<Link to="/addbook">
 							<span><i className="fa fa-user"></i></span>
 							<span>Add Books</span>
-						</Link>
-					</li>
-					<li>
-						<Link to="/">
-
-							<span><i className="fa fa-envelope"></i></span>
-							<span>All Books</span>
-						</Link>
-					</li>
-					<li className="active">
-						<Link to="#">
-							<span><i className="fa fa-bar-chart"></i></span>
-							<span>Analytics</span>
-						</Link>
-					</li>
-					<li>
-						<Link to="#">
-							<span><i className="fa fa-credit-card-alt"></i></span>
-							<span>Payments</span>
 						</Link>
 					</li>
 				</ul>
