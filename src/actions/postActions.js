@@ -27,12 +27,18 @@ export const createPost = postData => dispatch => {
       })
     );
 };
-export const deleteContact = (id) => {
+export const deleteContact = data =>dispatch => {
   debugger;
-  fetch(`https://booklibrary-api.herokuapp.com/products/${id}`, {
+  fetch(`https://booklibrary-api.herokuapp.com/products/${data._id}`, {
     method: 'DELETE',
     headers: {
       'content-type': 'application/json'
     }
-  }).then(res => console.log('qqq',res.json()))
+  }).then(res => res.json())
+  .then(post =>
+    dispatch({
+      type: REMOVE_BOOK,
+      payload: data._id
+    })
+  );
 }

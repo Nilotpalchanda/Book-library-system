@@ -1,17 +1,6 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import { deleteContact } from '../../actions/postActions';
 
-class card extends Component {
-    constructor(props) {
-        super(props);
-        this.deleteContact = this.deleteContact.bind(this);
-      }
-    deleteContact(e, index){
-        e.preventDefault();
-        this.props.deleteContact(index);
-      }
+export default class card extends Component {
     render() {
         return (
             <div className="column" id={this.props.id}>
@@ -20,7 +9,7 @@ class card extends Component {
                     <div className="container" style={{ height: "161px" }}>
                         <h4><b>{this.props.name}</b></h4>
                         <p>{this.props.author}</p>
-                        <button onClick={(e) => this.deleteContact(e,this.props.id)} className="btn btn-danger">
+                        <button onClick={this.props.onClick} className="btn btn-danger">
                             Remove
                          </button>
 
@@ -30,8 +19,4 @@ class card extends Component {
         )
     }
 }
-card.propTypes = {
-    deleteContact: PropTypes.func.isRequired
-  };
-  
-export default connect(null,{deleteContact})(card);
+

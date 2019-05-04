@@ -23,7 +23,7 @@ export default function(state = initialState, action) {
       case REMOVE_BOOK:
         return {
           ...state,
-          items: state.filter((data, i) => i !== action.id)
+          items: state.items.filter((data, i) => i !== action.id)
         }
     default:
       return state;
