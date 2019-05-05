@@ -2,6 +2,15 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 
 export default class sideBar extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			showNav: false
+		}}
+
+	_showMenu(){
+		this.setState({showNav: !this.state.showNav})
+	}
 	render() {
 		return (
 			<React.Fragment>
@@ -12,9 +21,9 @@ export default class sideBar extends Component {
 						<span>Book Stack</span>
 					</Link>
 					</div>
-					<a to="#" className="nav-trigger"><span></span></a>
+					<a href="#" onClick={()=>this._showMenu()} className="nav-trigger"><span></span></a>
 				</div>
-				<div className="side-nav">
+				<div className={this.state.showNav ? "side-nav visible" : "side-nav"}>
 					<div className="logo">
 					<Link to="/">
 						<i className="fa fa-book"></i>

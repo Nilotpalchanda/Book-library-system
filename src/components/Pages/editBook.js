@@ -5,6 +5,7 @@ import { createPatch, createPost } from '../../actions/postActions';
 import App from '../../App';
 import { datalist } from "../../Utils/constant";
 import Loader from '../loader/loader'
+
 class editBook extends Component {
   constructor(props) {
     super(props);
@@ -52,7 +53,10 @@ class editBook extends Component {
 
   }
   componentDidMount() {
-    this.setState({ isLoading: false })
+    setTimeout(() => {
+      this.setState({ isLoading: false })
+    }, 2000);
+    
   }
   render() {
     let dropDownDataValue = Object.keys(datalist).map(function (key, index) {
@@ -60,8 +64,8 @@ class editBook extends Component {
     });
 
     return (
-      this.state.isLoading ? <Loader /> : <App>
-        <div>
+      <App>
+        {this.state.isLoading ? <Loader /> : <div>
           <h1>{this.props.location.pathname === '/editBook' ? "Edit Book Deails" : "Add Book Deails"}</h1>
           <div className="booklib-4"><img src={this.state.bookimage.length > 0 ? this.state.bookimage : "https://hazlitt.net/sites/default/files/default-book.png"} alt="Smiley face" width="100%" />
           </div>
@@ -142,7 +146,7 @@ class editBook extends Component {
               <button className="buttonStyle" type="submit">Submit</button>
             </form>
           </div>
-        </div>
+        </div>}
       </App>
     );
   }
