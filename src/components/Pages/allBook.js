@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import App from '../../App'
 import Card from '../Books/Card'
 import Loader from '../loader/loader'
+import {link} from "../../Utils/constant";
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -24,7 +25,7 @@ class allBook extends Component {
         this.props.filerOptionValue(selectedValue)
     }
     editContact(e, data) {
-        this.props.history.push({ pathname: '/editBook', state: data });
+        this.props.history.push({ pathname: link.EditUrl, state: data });
     }
     componentDidMount() {
         this.props.fetchPosts();

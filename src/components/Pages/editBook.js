@@ -3,11 +3,10 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createPatch, createPost } from '../../actions/postActions';
 import App from '../../App';
-import { datalist } from "../../Utils/constant";
+import { datalist ,link, BlankImageUrl, HeaderTitle} from "../../Utils/constant";
 import Loader from '../loader/loader'
-import { InputComponent } from '../FormComponent/InputComponent';
-import { TextareaComponent } from '../FormComponent//TextareaComponent';
-import { DatalistComponent } from '../FormComponent//DatalistComponent';
+import { FormControler } from '../FormComponent/FormControler';
+
 
 class editBook extends Component {
   constructor(props) {
@@ -46,12 +45,10 @@ class editBook extends Component {
       bookdescription: this.state.bookdescription,
       bookcategory: this.state.bookcategory
     };
-    if (this.props.location.pathname === '/editBook') {
-      this.props.createPatch(post);
-    } else {
-      this.props.createPost(post)
-    }
-    setTimeout(() => { this.props.history.push('/') }, 1000);
+    if (this.props.location.pathname === link.EditUrl) this.props.createPatch(post);
+    else this.props.createPost(post)
+
+    setTimeout(() => { this.props.history.push(link.RootUrl) }, 1000);
   }
 
   componentDidMount() {
@@ -68,20 +65,11 @@ class editBook extends Component {
     return (
       <App>
         {this.state.isLoading ? <Loader /> : <div>
-          <h1>{this.props.location.pathname === '/editBook' ? "Edit Book Deails" : "Add Book Deails"}</h1>
-          <div className="booklib-4"><img src={this.state.bookimage.length > 0 ? this.state.bookimage : "https://hazlitt.net/sites/default/files/default-book.png"} alt={this.state.bookname} width="100%" />
+          <h1>{this.props.location.pathname === link.EditUrl ? HeaderTitle.EditBookDeails : HeaderTitle.AddBookDeails}</h1>
+          <div className="booklib-4"><img src={this.state.bookimage.length > 0 ? this.state.bookimage : BlankImageUrl.Url} alt={this.state.bookname} width="100%" />
           </div>
           <div className="booklib-8">
-            <form onSubmit={this.onSubmit}>
-                <InputComponent onChange={this.onChange} labelText={"Title:"} name={"bookname"} value={this.state.bookname}></InputComponent>
-                <InputComponent onChange={this.onChange} labelText={"Author:"} name={"bookauthor"} value={this.state.bookauthor}></InputComponent>
-                <DatalistComponent bookcategory={this.state.bookcategory} labelText={"Category:"} onChange={this.onChange} dropDownDataValue={dropDownDataValue}></DatalistComponent>
-                <InputComponent onChange={this.onChange} labelText={"Image Url:"} name={"bookimage"} value={this.state.bookimage}></InputComponent>
-                <InputComponent onChange={this.onChange} labelText={"Count:"} name={"bookcount"} value={this.state.bookcount}></InputComponent>
-                <InputComponent onChange={this.onChange} labelText={"Price:"} name={"bookprice"} value={this.state.bookprice}></InputComponent>
-                <TextareaComponent onChange={this.onChange} labelText={"Description:"} bookdescription={this.state.bookdescription}></TextareaComponent>
-              <button className="buttonStyle" type="submit">Submit</button>
-            </form>
+          <FormControler onSubmit={this.onSubmit} onChange={this.onChange} bookname={this.state.bookname} bookauthor={this.state.bookauthor} bookcategory={this.state.bookcategory} bookimage={this.state.bookimage} bookcount={this.state.bookcount} bookprice={this.state.bookprice} bookdescription={this.state.bookdescription} dropDownDataValue={dropDownDataValue}></FormControler>
           </div>
         </div>}
       </App>
