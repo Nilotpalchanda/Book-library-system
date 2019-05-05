@@ -31,7 +31,7 @@ class allBook extends Component {
         this.props.fetchPosts();
     }
     render() {
-        let cards = this.props.posts.map((book, index) => {
+        let cards = this.props.posts.reverse().map((book, index) => {
             return (
                 <Card
                     id={book._id}
