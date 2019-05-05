@@ -5,7 +5,7 @@ import { createPatch, createPost } from '../../actions/postActions';
 import App from '../../App';
 import { datalist ,link, BlankImageUrl, HeaderTitle} from "../../Utils/constant";
 import Loader from '../loader/loader'
-import { FormControler } from '../FormComponent/FormControler';
+import { FormController } from '../FormComponent/FormController';
 
 
 class editBook extends Component {
@@ -69,7 +69,7 @@ class editBook extends Component {
           <div className="booklib-4"><img src={this.state.bookimage.length > 0 ? this.state.bookimage : BlankImageUrl.Url} alt={this.state.bookname} width="100%" />
           </div>
           <div className="booklib-8">
-          <FormControler onSubmit={this.onSubmit} onChange={this.onChange} bookname={this.state.bookname} bookauthor={this.state.bookauthor} bookcategory={this.state.bookcategory} bookimage={this.state.bookimage} bookcount={this.state.bookcount} bookprice={this.state.bookprice} bookdescription={this.state.bookdescription} dropDownDataValue={dropDownDataValue}></FormControler>
+          <FormController onSubmit={this.onSubmit} onChange={this.onChange} bookname={this.state.bookname} bookauthor={this.state.bookauthor} bookcategory={this.state.bookcategory} bookimage={this.state.bookimage} bookcount={this.state.bookcount} bookprice={this.state.bookprice} bookdescription={this.state.bookdescription} dropDownDataValue={dropDownDataValue}></FormController>
           </div>
         </div>}
       </App>
