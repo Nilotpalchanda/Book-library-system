@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { createPatch } from '../../actions/postActions';
+import { createPatch, createPost } from '../../actions/postActions';
 import App from '../../App';
-
+import { datalist } from "../../Utils/constant";
+import Loader from '../loader/loader'
 class editBook extends Component {
   constructor(props) {
     super(props);
@@ -16,7 +17,8 @@ class editBook extends Component {
       bookcount: data.bookcount || '',
       bookprice: data.bookprice || '',
       bookdescription: data.bookdescription || '',
-      bookcategory: data.bookcategory || ''
+      bookcategory: data.bookcategory || '',
+      isLoading: true
     };
 
     this.onChange = this.onChange.bind(this);
@@ -40,15 +42,25 @@ class editBook extends Component {
       bookdescription: this.state.bookdescription,
       bookcategory: this.state.bookcategory
     };
-    this.props.createPatch(post);
-    setTimeout(() => {this.props.history.push('/')}, 1000);
-    
-  }
+    if (this.props.location.pathname === '/editBook') {
+      this.props.createPatch(post);
+    } else {
+      this.props.createPost(post)
+    }
 
+    setTimeout(() => { this.props.history.push('/') }, 1000);
+
+  }
+  componentDidMount() {
+    this.setState({ isLoading: false })
+  }
   render() {
-    console.log('qqq',this.props)
+    let dropDownDataValue = Object.keys(datalist).map(function (key, index) {
+      return datalist[key];
+    });
+
     return (
-      <App>
+      this.state.isLoading ? <Loader /> : <App>
         <div>
           <h1>Edit Post</h1>
           <div className="booklib-4"><img src={this.state.bookimage.length > 0 ? this.state.bookimage : "https://hazlitt.net/sites/default/files/default-book.png"} alt="Smiley face" width="100%" />
@@ -80,8 +92,8 @@ class editBook extends Component {
                 <br />
                 <input list="browsers" value={this.state.bookcategory} type="text" onChange={this.onChange} name="bookcategory" />
                 <datalist id="browsers">
-                  {[this.props.location.state].map((item, key) =>
-                    <option key={key} value={item.bookcategory} />
+                  {dropDownDataValue.map((value, index) =>
+                    <option key={index} value={value} />
                   )}
                 </datalist>
               </div>
@@ -96,7 +108,7 @@ class editBook extends Component {
                 />
               </div>
               <div>
-                <label>bookcount: </label>
+                <label>Count: </label>
                 <br />
                 <input
                   type="text"
@@ -117,7 +129,7 @@ class editBook extends Component {
               </div>
               <br />
               <div>
-                <label>bookdescription: </label>
+                <label>Description: </label>
                 <br />
                 <textarea
                   name="bookdescription"
@@ -140,4 +152,4 @@ editBook.propTypes = {
   createPost: PropTypes.func.isRequired
 };
 
-export default connect(null, { createPatch })(editBook);
+export default connect(null, { createPatch, createPost })(editBook);

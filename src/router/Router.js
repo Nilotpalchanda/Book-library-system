@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Router, Route, Switch} from 'react-router-dom';
 import allBook from '../components/Pages/allBook'
-import addBook from '../components/Pages/addBook'
+
 import editBook from '../components/Pages/editBook'
 import history from './history'
 class router extends Component {
@@ -10,7 +10,7 @@ class router extends Component {
             <Router history={history}>
                     <Switch>
                         <Route exact path="/" component={allBook} />
-                        <Route exact path="/addbook" component={addBook} />
+                        <Route exact path="/addbook" component={editBook} />
                         <Route exact path="/editbook" component={editBook} />
                     </Switch>
             </Router>
@@ -19,3 +19,6 @@ class router extends Component {
 }
 
 export default router
+
+
+

@@ -35,7 +35,7 @@ export const createPatch = (patchData) => dispatch => {
     dispatch(fetchPosts())
   })
 };
-export const deleteContact = data =>dispatch => {
+export const deletePost = data =>dispatch => {
   debugger;
   fetch(`https://booklibrary-api.herokuapp.com/products/${data._id}`, {
     method: 'DELETE',

@@ -5,7 +5,7 @@ import Loader from '../loader/loader'
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { fetchPosts, deleteContact, fetchProductsFilter, filerOptionValue } from '../../actions/postActions';
+import { fetchPosts, deletePost, fetchProductsFilter, filerOptionValue } from '../../actions/postActions';
 
 class allBook extends Component {
     constructor(props) {
@@ -15,7 +15,7 @@ class allBook extends Component {
     }
     deleteContact(e, data) {
         e.preventDefault();
-        this.props.deleteContact(data)
+        this.props.deletePost(data)
     }
     handleSearch = (searchValue) => {
         this.props.fetchProductsFilter(searchValue);
@@ -86,7 +86,7 @@ allBook.propTypes = {
     optionValue: PropTypes.func.isRequired
 
 };
-const mapDispatchToProps = dispatch => bindActionCreators({ fetchProductsFilter, deleteContact, fetchPosts, filerOptionValue }, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({ fetchProductsFilter, deletePost, fetchPosts, filerOptionValue }, dispatch);
 const mapStateToProps = state => ({
     posts: state.posts.searchArray,
     searchValue: state.posts.searchValue,

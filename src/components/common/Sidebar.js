@@ -12,7 +12,7 @@ export default class sideBar extends Component {
 						<span>Book Stack</span>
 					</Link>
 					</div>
-					<Link to="#" className="nav-trigger"><span></span></Link>
+					<a to="#" className="nav-trigger"><span></span></a>
 				</div>
 				<div className="side-nav">
 					<div className="logo">
@@ -31,10 +31,10 @@ export default class sideBar extends Component {
 								</Link>
 							</li>
 							<li>
-								<Link to="/addbook">
+								<a href="/addbook">
 									<span><i className="fa fa-plus-square-o"></i></span>
 									<span>Add Books</span>
-								</Link>
+								</a>
 							</li>
 						</ul>
 					</nav>
