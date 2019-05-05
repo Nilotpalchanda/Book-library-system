@@ -62,7 +62,7 @@ class editBook extends Component {
     return (
       this.state.isLoading ? <Loader /> : <App>
         <div>
-          <h1>Edit Post</h1>
+          <h1>{this.props.location.pathname === '/editBook' ? "Edit Book Deails" : "Add Book Deails"}</h1>
           <div className="booklib-4"><img src={this.state.bookimage.length > 0 ? this.state.bookimage : "https://hazlitt.net/sites/default/files/default-book.png"} alt="Smiley face" width="100%" />
           </div>
           <div className="booklib-8">
