@@ -18,7 +18,7 @@ export default class sideBar extends Component {
 					<div className="logo">
 					<Link to="/">
 						<i className="fa fa-book"></i>
-						<span>Book Stack</span>
+						<span>Books Stack</span>
 					</Link>
 					</div>
 					<a href="#" onClick={()=>this._showMenu()} className="nav-trigger"><span></span></a>
@@ -27,7 +27,7 @@ export default class sideBar extends Component {
 					<div className="logo">
 					<Link to="/">
 						<i className="fa fa-book"></i>
-						<span>Book Stack</span>
+						<span>Books Stack</span>
 					</Link>
 					</div>
 					<nav>

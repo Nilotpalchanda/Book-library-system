@@ -10,7 +10,6 @@ const initialState = {
 };
 
 export default function(state = initialState, action) {
-  console.log(action)
   switch (action.type) {
     
     case FETCH_POSTS:
@@ -34,7 +33,7 @@ export default function(state = initialState, action) {
      case FETCH_PRODUCT_FILTER:
 
           const { searchValue } = action;
-          var updatedList = state.items;
+          let updatedList = state.items;
           updatedList = updatedList.filter(function(item){
             return item.bookname.toLowerCase().search(searchValue.toLowerCase()) !== -1
           });
@@ -44,16 +43,15 @@ export default function(state = initialState, action) {
             searchArray:updatedList 
           };
       case SELECT_FILTER:
-        debugger;
           const { selectedValue } = action;
-          var updatedList = state.items;
-          updatedList = updatedList.filter(function(item){
+          let updatedListForFilter = state.items;
+          updatedListForFilter = updatedListForFilter.filter(function(item){
             return item.bookcategory.toLowerCase().search(selectedValue.toLowerCase()) !== -1
           });
           return { 
             ...state, 
             selectedValue,
-            searchArray:updatedList 
+            searchArray:updatedListForFilter 
           };
     default:
       return state;

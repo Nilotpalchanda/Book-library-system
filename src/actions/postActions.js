@@ -1,4 +1,4 @@
-import { FETCH_POSTS, NEW_POST,FETCH_PRODUCT_FILTER,SELECT_FILTER } from './types';
+import { FETCH_POSTS,FETCH_PRODUCT_FILTER,SELECT_FILTER } from './types';
 
 export const fetchPosts = () => dispatch => {
   fetch('https://booklibrary-api.herokuapp.com/products')

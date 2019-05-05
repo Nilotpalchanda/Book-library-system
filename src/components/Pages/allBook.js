@@ -30,9 +30,7 @@ class allBook extends Component {
         this.props.fetchPosts();
     }
     render() {
-        console.log('ddd', this.props.posts)
         let cards = this.props.posts.map((book, index) => {
-
             return (
                 <Card
                     id={book._id}
@@ -69,7 +67,7 @@ class allBook extends Component {
                         <option value="">All</option>
                         {filteredArr.map((item, key) =>
                             <option key={key} value={item.bookcategory}>{item.bookcategory}</option>
-                        )}
+                    )}
                     </select>
                     <p className="pStyle">There are more than {this.props.posts.length} books in this librarie. See Below</p>
                     {cards.length ? cards : <Loader />}

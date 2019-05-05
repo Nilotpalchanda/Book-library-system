@@ -5,6 +5,9 @@ import { createPatch, createPost } from '../../actions/postActions';
 import App from '../../App';
 import { datalist } from "../../Utils/constant";
 import Loader from '../loader/loader'
+import { InputComponent } from '../FormComponent/InputComponent';
+import { TextareaComponent } from '../FormComponent//TextareaComponent';
+import { DatalistComponent } from '../FormComponent//DatalistComponent';
 
 class editBook extends Component {
   constructor(props) {
@@ -48,15 +51,14 @@ class editBook extends Component {
     } else {
       this.props.createPost(post)
     }
-
     setTimeout(() => { this.props.history.push('/') }, 1000);
-
   }
+
   componentDidMount() {
     setTimeout(() => {
       this.setState({ isLoading: false })
     }, 2000);
-    
+
   }
   render() {
     let dropDownDataValue = Object.keys(datalist).map(function (key, index) {
@@ -67,82 +69,17 @@ class editBook extends Component {
       <App>
         {this.state.isLoading ? <Loader /> : <div>
           <h1>{this.props.location.pathname === '/editBook' ? "Edit Book Deails" : "Add Book Deails"}</h1>
-          <div className="booklib-4"><img src={this.state.bookimage.length > 0 ? this.state.bookimage : "https://hazlitt.net/sites/default/files/default-book.png"} alt="Smiley face" width="100%" />
+          <div className="booklib-4"><img src={this.state.bookimage.length > 0 ? this.state.bookimage : "https://hazlitt.net/sites/default/files/default-book.png"} alt={this.state.bookname} width="100%" />
           </div>
           <div className="booklib-8">
             <form onSubmit={this.onSubmit}>
-              <div>
-                <label>Title: </label>
-                <br />
-                <input
-                  type="text"
-                  name="bookname"
-                  onChange={this.onChange}
-                  value={this.state.bookname}
-                />
-              </div>
-              <div>
-                <label>Author: </label>
-                <br />
-                <input
-                  type="text"
-                  name="bookauthor"
-                  onChange={this.onChange}
-                  value={this.state.bookauthor}
-                />
-              </div>
-              <div>
-                <label>Category: </label>
-                <br />
-                <input list="browsers" value={this.state.bookcategory} type="text" onChange={this.onChange} name="bookcategory" />
-                <datalist id="browsers">
-                  {dropDownDataValue.map((value, index) =>
-                    <option key={index} value={value} />
-                  )}
-                </datalist>
-              </div>
-              <div>
-                <label>Image Url: </label>
-                <br />
-                <input
-                  type="text"
-                  name="bookimage"
-                  onChange={this.onChange}
-                  value={this.state.bookimage}
-                />
-              </div>
-              <div>
-                <label>Count: </label>
-                <br />
-                <input
-                  type="text"
-                  name="bookcount"
-                  onChange={this.onChange}
-                  value={this.state.bookcount}
-                />
-              </div>
-              <div>
-                <label>Price: </label>
-                <br />
-                <input
-                  type="text"
-                  name="bookprice"
-                  onChange={this.onChange}
-                  value={this.state.bookprice}
-                />
-              </div>
-              <br />
-              <div>
-                <label>Description: </label>
-                <br />
-                <textarea
-                  name="bookdescription"
-                  onChange={this.onChange}
-                  value={this.state.bookdescription}
-                  rows="8" cols="50"
-                />
-              </div>
-              <br />
+                <InputComponent onChange={this.onChange} labelText={"Title:"} name={"bookname"} value={this.state.bookname}></InputComponent>
+                <InputComponent onChange={this.onChange} labelText={"Author:"} name={"bookauthor"} value={this.state.bookauthor}></InputComponent>
+                <DatalistComponent bookcategory={this.state.bookcategory} labelText={"Category:"} onChange={this.onChange} dropDownDataValue={dropDownDataValue}></DatalistComponent>
+                <InputComponent onChange={this.onChange} labelText={"Image Url:"} name={"bookimage"} value={this.state.bookimage}></InputComponent>
+                <InputComponent onChange={this.onChange} labelText={"Count:"} name={"bookcount"} value={this.state.bookcount}></InputComponent>
+                <InputComponent onChange={this.onChange} labelText={"Price:"} name={"bookprice"} value={this.state.bookprice}></InputComponent>
+                <TextareaComponent onChange={this.onChange} labelText={"Description:"} bookdescription={this.state.bookdescription}></TextareaComponent>
               <button className="buttonStyle" type="submit">Submit</button>
             </form>
           </div>
@@ -157,3 +94,4 @@ editBook.propTypes = {
 };
 
 export default connect(null, { createPatch, createPost })(editBook);
+
