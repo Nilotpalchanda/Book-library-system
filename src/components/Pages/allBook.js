@@ -25,7 +25,7 @@ class allBook extends Component {
     handleSearch = (searchValue) => {
         this.props.fetchProductsFilter(searchValue);
     }
-    optionValue = (selectedValue) =>{
+    optionValue = (selectedValue) => {
         this.props.filerOptionValue(selectedValue)
     }
     editContact(e, data) {
@@ -35,7 +35,7 @@ class allBook extends Component {
         this.props.fetchPosts();
     }
     render() {
-        console.log('ddd',this.props.posts)
+        console.log('ddd', this.props.posts)
         let cards = this.props.posts.map((book, index) => {
 
             return (
@@ -53,7 +53,12 @@ class allBook extends Component {
             )
         })
 
-         
+        const arr = this.props.filterArray;
+        let filteredArr = arr.reduce((acc, current) => {
+            let x = acc.find(item => item.bookcategory === current.bookcategory);
+            if (!x) return acc.concat([current])
+            else return acc;
+        }, []);
         return (
             <React.Fragment>
                 <App>
@@ -65,10 +70,11 @@ class allBook extends Component {
                         value={this.props.searchValue}
                         onInput={(e) => this.handleSearch(e.target.value)}
                     />
-                    <select className="filterSearch" name="caBrands" onChange={(e)=>this.optionValue(e.target.value)}>
-                    {this.props.filterArray.map((item, key) =>
-                        <option key={key} value={item.bookcategory}>{item.bookcategory}</option>
-                     )}
+                    <select className="filterSearch"  onChange={(e) => this.optionValue(e.target.value)}>
+                        <option value="">All</option>
+                        {filteredArr.map((item, key) =>
+                            <option key={key} value={item.bookcategory}>{item.bookcategory}</option>
+                        )}
                     </select>
                     <p className="pStyle">Resize the browser window to see the effect.</p>
                     {cards.length ? cards : <Loader />}

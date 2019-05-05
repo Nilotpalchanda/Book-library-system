@@ -25,6 +25,11 @@
   
   /* Responsive columns */
   @media screen and (max-width: 600px) {
+    .logo a {
+      color: #111111 !important;
+      display: block !important;
+      text-decoration: none !important;
+    }
     .booklib-4{
       margin-top: 14% !important;
       max-width: 100% !important;
@@ -60,8 +65,6 @@
   .container {
     padding: 2px 16px;
   }
-
-
 
   /* 
   for form
@@ -185,4 +188,9 @@ select.filterSearch {
 }
 .pStyle{
   margin-bottom: 3%;
+}
+.logo a {
+  color: #fff;
+  display: block;
+  text-decoration: none;
 }
