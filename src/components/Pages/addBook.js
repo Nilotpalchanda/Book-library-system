@@ -79,7 +79,7 @@ class addBook extends Component {
               <div>
                 <label>Category: </label>
                 <br />
-                <input list="browsers" onChange={this.onChange} name="bookcategory" />
+                <input list="browsers" type="text" onChange={this.onChange} name="bookcategory" />
                 <datalist id="browsers">
                   <option value="Internet Explorer" />
                   <option value="Firefox" />

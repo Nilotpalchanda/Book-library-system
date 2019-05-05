@@ -52,6 +52,8 @@ class allBook extends Component {
                 />
             )
         })
+
+         
         return (
             <React.Fragment>
                 <App>
@@ -63,12 +65,12 @@ class allBook extends Component {
                         value={this.props.searchValue}
                         onInput={(e) => this.handleSearch(e.target.value)}
                     />
-                    <p>Resize the browser window to see the effect.</p>
-                    <select name="caBrands" onChange={(e)=>this.optionValue(e.target.value)}>
-                    {this.props.posts.map((item, key) =>
-                    <option key={key} value={item.bookcategory}>{item.bookcategory}</option>
+                    <select className="filterSearch" name="caBrands" onChange={(e)=>this.optionValue(e.target.value)}>
+                    {this.props.filterArray.map((item, key) =>
+                        <option key={key} value={item.bookcategory}>{item.bookcategory}</option>
                      )}
                     </select>
+                    <p className="pStyle">Resize the browser window to see the effect.</p>
                     {cards.length ? cards : <Loader />}
                     <ToastContainer />
                 </App>
@@ -87,7 +89,8 @@ allBook.propTypes = {
 const mapDispatchToProps = dispatch => bindActionCreators({ fetchProductsFilter, deleteContact, fetchPosts, filerOptionValue }, dispatch);
 const mapStateToProps = state => ({
     posts: state.posts.searchArray,
-    searchValue: state.posts.searchValue
+    searchValue: state.posts.searchValue,
+    filterArray: state.posts.filterArray
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(allBook);

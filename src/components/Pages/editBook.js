@@ -77,7 +77,7 @@ console.log('ggg',this.props.location.state)
               <div>
                 <label>Category: </label>
                 <br />
-                <input list="browsers" value={this.state.bookcategory} onChange={this.onChange} name="bookcategory" />
+                <input list="browsers" value={this.state.bookcategory} type="text" onChange={this.onChange} name="bookcategory" />
                 <datalist id="browsers">
                   {[this.props.location.state].map((item, key) =>
                     <option key={key} value={item.bookcategory} />

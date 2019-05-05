@@ -178,3 +178,11 @@
   float: left;
   margin-top: 4%;
 }
+select.filterSearch {
+  float: right;
+  width: 20%;
+  margin-top: 1%;
+}
+.pStyle{
+  margin-bottom: 3%;
+}

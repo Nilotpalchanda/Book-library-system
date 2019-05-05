@@ -4,6 +4,7 @@ const initialState = {
   items: [],
   item: {},
   searchArray:[],
+  filterArray:[],
   searchValue: '',
   selectedValue:''
 };
@@ -16,7 +17,8 @@ export default function(state = initialState, action) {
       return {
         ...state,
         items: action.payload,
-        searchArray:action.payload
+        searchArray:action.payload,
+        filterArray:action.payload
         
       };
     case NEW_POST:
