@@ -102,7 +102,7 @@ class editBook extends Component {
                 </datalist>
               </div>
               <div>
-                <label>Image: </label>
+                <label>Image Url: </label>
                 <br />
                 <input
                   type="text"
