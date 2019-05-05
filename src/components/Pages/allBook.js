@@ -57,7 +57,7 @@ class allBook extends Component {
         return (
             <React.Fragment>
                 <App>
-                    <h2>Responsive Column Cards</h2>
+                    <h2>Dashboard</h2>
                     <input
                         className="searchBook"
                         type="search"
@@ -71,7 +71,7 @@ class allBook extends Component {
                             <option key={key} value={item.bookcategory}>{item.bookcategory}</option>
                         )}
                     </select>
-                    <p className="pStyle">Resize the browser window to see the effect.</p>
+                    <p className="pStyle">There are more than {this.props.posts.length} books in this librarie. See Below</p>
                     {cards.length ? cards : <Loader />}
                 </App>
             </React.Fragment>
