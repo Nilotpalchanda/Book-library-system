@@ -41,11 +41,12 @@ class editBook extends Component {
       bookcategory: this.state.bookcategory
     };
     this.props.createPatch(post);
-
+    setTimeout(() => {this.props.history.push('/')}, 1000);
+    
   }
 
   render() {
-console.log('ggg',this.props.location.state)
+    console.log('qqq',this.props)
     return (
       <App>
         <div>

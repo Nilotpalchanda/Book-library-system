@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createPost } from '../../actions/postActions';
 import App from '../../App'
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 class addBook extends Component {
   constructor(props) {
@@ -24,10 +22,8 @@ class addBook extends Component {
   }
 
   onChange(e) {
-    debugger;
     this.setState({ [e.target.name]: e.target.value });
   }
-
   onSubmit(e) {
     e.preventDefault();
 
@@ -41,12 +37,9 @@ class addBook extends Component {
       bookcategory: this.state.bookcategory
     };
     this.props.createPost(post)
-    this.render();
-    toast(<div><span className="FormFullName"></span> Your Meassage Successfully Send. For conformation please Check Console</div>);
-
+    setTimeout(() => {this.props.history.push('/')}, 1000);
 
   }
-
   render() {
     return (
       <App>
@@ -131,7 +124,6 @@ class addBook extends Component {
               </div>
               <br />
               <button className="buttonStyle" type="submit">Submit</button>
-              <ToastContainer />
             </form>
           </div>
         </div>

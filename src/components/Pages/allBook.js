@@ -5,8 +5,6 @@ import Loader from '../loader/loader'
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import { fetchPosts, deleteContact, fetchProductsFilter, filerOptionValue } from '../../actions/postActions';
 
 class allBook extends Component {
@@ -18,9 +16,6 @@ class allBook extends Component {
     deleteContact(e, data) {
         e.preventDefault();
         this.props.deleteContact(data)
-        toast(<div><span className="FormFullName"></span> Delete Succefully</div>);
-
-
     }
     handleSearch = (searchValue) => {
         this.props.fetchProductsFilter(searchValue);
@@ -78,7 +73,6 @@ class allBook extends Component {
                     </select>
                     <p className="pStyle">Resize the browser window to see the effect.</p>
                     {cards.length ? cards : <Loader />}
-                    <ToastContainer />
                 </App>
             </React.Fragment>
         )
